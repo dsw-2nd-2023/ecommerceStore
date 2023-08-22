@@ -2,10 +2,11 @@ import { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { CartContext } from "../App";
+import { CartContext } from "../CartCxt";
 
 const ProductDetails = ({ navigation, route }) => {
-  const { product } = route.params;
+  const { product, from = "HomeScreen" } = route.params;
+  
   const { addToCart } = useContext(CartContext);
 
   return (
@@ -17,18 +18,13 @@ const ProductDetails = ({ navigation, route }) => {
           size={24}
           color="grey"
           onPress={() => {
-            navigation.navigate("HomeScreen");
+            navigation.navigate(from);
           }}
         />
         <Text style={styles.textVisisble}>{product.name}</Text>
       </View>
 
-      <View
-        key={product.id}
-        onPress={() => {
-          navigation.navigate("ProductDetails", { product });
-        }}
-      >
+      <View key={product.id}>
         <Image source={{ uri: product.image }} style={styles.image} />
         <View style={styles.details}>
           <Text
