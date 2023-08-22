@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import products from "../Products";
-import { CartContext } from "../App";
+import { CartContext } from "../CartCxt";
 
 const HomeScreen = ({ navigation }) => {
   const { addToCart } = useContext(CartContext);
