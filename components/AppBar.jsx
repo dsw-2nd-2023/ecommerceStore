@@ -1,33 +1,69 @@
-import { Button } from "react-native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "../screens/HomeScreen";
-import ProductDetails from "../screens/ProductDetails";
 import Cart from "../screens/Cart";
+import HomeScreen from "../screens/HomeScreen";
 
+import { AntDesign } from "@expo/vector-icons";
+
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 const Tab = createBottomTabNavigator();
 
 const AppBar = () => {
-    return ( 
-        <Tab.Navigator
-            initialRouteName="HomeScreen"
-        >
-            <Tab.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{
-                    tabBarLabel:"Home"
-                }}
+  return (
+    <Tab.Navigator
+      initialRouteName="HomeScreen"
+      tabBarOptions={{
+        activeTintColor: "green",
+        inactiveTintColor: "black",
+        labelStyle: {
+          fontSize: 16,
+        },
+      }}
+    >
+      <Tab.Screen
+        name="HomeScreen"
+        component={HomeScreen}
+        options={{
+          tabBarLabel: "Home",
+          title: "E-commerce Store",
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="home"
+              size={24}
+              color={focused ? "green" : "black"}
             />
-            <Tab.Screen
-                name="Cart"
-                component={Cart}
-                options={{
-                    tabBarLabel:"Cart"
-                }}
+          ),
+          headerStyle: {
+            borderBottomWidth: 1,
+            borderBottomColor: "lightgrey"
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          tabBarLabel: "Cart",
+          title: "Cart",
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="shoppingcart"
+              size={24}
+              color={focused ? "green" : "black"}
             />
-        </Tab.Navigator>
-     );
-}
- 
+          ),
+          tabBarBadge: 3,
+          tabBarBadgeStyle: {
+            backgroundColor: "white",
+            color: "green",
+          },
+          headerStyle: {
+            borderBottomWidth: 1,
+            borderBottomColor: "lightgrey"
+          },
+        }}
+      />
+    </Tab.Navigator>
+  );
+};
+
 export default AppBar;
