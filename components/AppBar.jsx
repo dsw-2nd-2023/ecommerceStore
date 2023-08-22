@@ -5,7 +5,8 @@ import HomeScreen from "../screens/HomeScreen";
 
 import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { CartContext } from "../App";
+import { CartContext } from "../CartCxt";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -14,12 +15,18 @@ const AppBar = () => {
   return (
     <Tab.Navigator
       initialRouteName="HomeScreen"
-      tabBarOptions={{
-        activeTintColor: "green",
-        inactiveTintColor: "black",
-        labelStyle: {
+      screenOptions={{
+        tabBarActiveTintColor: "green",
+        tabBarInactiveTintColor: "black",
+        tabBarLabelStyle: {
           fontSize: 16,
         },
+        tabBarStyle: [
+          {
+            display: "flex",
+          },
+          null,
+        ],
       }}
     >
       <Tab.Screen
