@@ -1,64 +1,67 @@
-import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './screens/HomeScreen';
-import ProductDetails from './screens/ProductDetails';
-import Cart from './screens/Cart';
 import AppBar from './components/AppBar';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createContext, useState } from 'react';
+import ProductDetails from './screens/ProductDetails';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
+
+export const CartContext = createContext();
+
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [itemsCount, setItemsCount] = useState(0);
 
-  // return (
-  //   <NavigationContainer>
-  //     <Tab.Navigator
-  //       initialRouteName="HomeScreen"
-  //     >
-  //       <Tab.Screen
-  //         name="HomeScreen"
-  //         navigationKey='HomeScreen'
-  //         component={HomeScreen}
-  //         options={{
-  //           tabBarLabel: "Home",
-  //           title: "E-commerce Store"
-  //         }}
-  //       />
-  //       <Tab.Screen
-  //         name="Cart"
-  //         navigationKey='Cart'
-  //         component={Cart}
-  //         options={{
-  //           tabBarLabel: "Cart"
-  //         }}
-  //       />
-  //     </Tab.Navigator>
+  const addToCart = (item) => {
+    setCart([...cart, item]);
+    setTotal(total + item.price);
+    setItemsCount(itemsCount + 1);
+  }
 
-  //   </NavigationContainer>
-  // )
+  const removeFromCart = (item) => {
+    //challange: remove the item from cart
+  }
 
+  const increaseQuantity = (item) => {
+    //challange: increase the quantity of the item
+    // also increase the total price
+  }
+
+  const decreaseQuantity = (item) => {
+    //challange: decrease the quantity of the item 
+    // if quantity is 1, remove the item from cart
+    // also decrease the total price
+
+  }
+
+  const clearCart = () => {
+    setCart([]);
+    setTotal(0);
+    setItemsCount(0);
+  }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName='AppBar'
-        screenOptions={{
-          headerShown: false
-        }}
-      >
-        <Stack.Screen
-          name='ProductDetails'
-          component={ProductDetails}
-        />
-        <Stack.Screen 
-          name='AppBar'
-          component={AppBar}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <CartContext.Provider value={{ cart, total, addToCart, removeFromCart, clearCart, itemsCount }}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName='AppBar'
+          screenOptions={{
+            headerShown: false
+          }}
+        >
+          <Stack.Screen
+            name='ProductDetails'
+            component={ProductDetails}
+          />
+          <Stack.Screen
+            name='AppBar'
+            component={AppBar}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </CartContext.Provider>
   );
 }
 

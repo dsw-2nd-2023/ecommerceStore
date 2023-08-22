@@ -1,9 +1,12 @@
+import { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
+import { CartContext } from "../App";
 
 const ProductDetails = ({ navigation, route }) => {
   const { product } = route.params;
+  const { addToCart } = useContext(CartContext);
 
   return (
     <View style={styles.container}>
@@ -62,6 +65,7 @@ const ProductDetails = ({ navigation, route }) => {
               padding: 10,
               marginTop: 20,
             }}
+            onPress={() => addToCart(product)}
           />
         </View>
       </View>

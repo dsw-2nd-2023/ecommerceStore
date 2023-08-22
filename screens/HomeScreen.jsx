@@ -1,21 +1,23 @@
 import { StatusBar } from "expo-status-bar";
 import {
-  Button,
-  FlatList,
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
   View,
+  Text,
+  Image,
+  FlatList,
+  Pressable,
   Dimensions,
+  StyleSheet,
 } from "react-native";
+import { useContext } from "react";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import products from "../Products";
+import { CartContext } from "../App";
 
 const HomeScreen = ({ navigation }) => {
+  const { addToCart } = useContext(CartContext);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -60,6 +62,7 @@ const HomeScreen = ({ navigation }) => {
                 style={{
                   padding: 10,
                 }}
+                onPress={() => addToCart(item)}
               />
             </View>
           </Pressable>
