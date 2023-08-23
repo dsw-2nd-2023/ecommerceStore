@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+
 import {
   View,
   Text,
@@ -8,68 +8,14 @@ import {
   Dimensions,
   StyleSheet,
 } from "react-native";
-import { useContext } from "react";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+const HomeScreen = () => {
 
-import products from "../Products";
-import { CartContext } from "../CartCxt";
-
-const HomeScreen = ({ navigation }) => {
-  const { addToCart } = useContext(CartContext);
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <FlatList
-        data={products}
-        renderItem={({ item }) => (
-          <Pressable
-            key={item.id}
-            style={styles.product.component}
-            onPress={() => {
-              navigation.navigate("ProductDetails", { product: item });
-            }}
-          >
-            <Image source={{ uri: item.image }} style={styles.product.image} />
-            <View style={styles.product.details}>
-              <View
-                style={{
-                  marginBottom: 10,
-                  padding: 10,
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 20,
-                  }}
-                >
-                  {item.name}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 18,
-                  }}
-                >
-                  {item.price}
-                </Text>
-              </View>
-              <MaterialCommunityIcons
-                name="cart-arrow-down"
-                size={30}
-                color="green"
-                style={{
-                  padding: 10,
-                }}
-                onPress={() => addToCart(item)}
-              />
-            </View>
-          </Pressable>
-        )}
-        keyExtractor={(item) => item.id}
-        showsVerticalScrollIndicator={false}
-      />
+      <Text>Home Screen</Text>
     </View>
   );
 };

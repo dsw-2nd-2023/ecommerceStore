@@ -1,70 +1,10 @@
-import { useContext } from "react";
-import { StatusBar } from "expo-status-bar";
-import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { Image, ScrollView, StyleSheet, Text, View } from "react-native";
-import { CartContext } from "../CartCxt";
 
-const ProductDetails = ({ navigation, route }) => {
-  const { product, from = "HomeScreen" } = route.params;
-  
-  const { addToCart } = useContext(CartContext);
+const ProductDetails = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar style="light" />
-      <View style={styles.container.details}>
-        <Entypo
-          name="chevron-left"
-          size={24}
-          color="grey"
-          onPress={() => {
-            navigation.navigate(from);
-          }}
-        />
-        <Text style={styles.textVisisble}>{product.name}</Text>
-      </View>
-
-      <View key={product.id}>
-        <Image source={{ uri: product.image }} style={styles.image} />
-        <View style={styles.details}>
-          <Text
-            style={{
-              marginBottom: 15,
-              fontSize: 28,
-              fontWeight: "bold",
-            }}
-          >
-            {product.name}
-          </Text>
-          <Text
-            style={{
-              marginBottom: 5,
-              fontSize: 25,
-              fontWeight: "normal",
-            }}
-          >
-            {product.price}
-          </Text>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            style={{
-              height: 130,
-            }}
-          >
-            <Text style={styles.description}>{product.Description}</Text>
-          </ScrollView>
-          <MaterialCommunityIcons
-            name="cart-arrow-down"
-            size={30}
-            color="green"
-            style={{
-              padding: 10,
-              marginTop: 20,
-            }}
-            onPress={() => addToCart(product)}
-          />
-        </View>
-      </View>
+      <Text>Product Details</Text>
     </View>
   );
 };
