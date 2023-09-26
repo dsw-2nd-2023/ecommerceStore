@@ -7,6 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CartContext } from "../CartCxt";
 import SavedCarts from "../screens/SavedCarts";
+import AddProduct from "../screens/AddProduct";
 
 
 const Tab = createBottomTabNavigator();
@@ -94,7 +95,7 @@ const AppBar = () => {
       />
       <Tab.Screen
         name="Add"
-        component={Cart}
+        component={AddProduct}
         options={{
           tabBarLabel: "Add",
           title: "Add Product",
