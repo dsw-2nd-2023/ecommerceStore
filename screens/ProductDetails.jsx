@@ -51,7 +51,7 @@ const ProductDetails = ({ navigation, route }) => {
               height: 130,
             }}
           >
-            <Text style={styles.description}>{product.Description}</Text>
+            <Text style={styles.description}>{product.description}</Text>
           </ScrollView>
           <MaterialCommunityIcons
             name="cart-arrow-down"
