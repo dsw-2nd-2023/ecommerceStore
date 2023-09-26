@@ -7,6 +7,7 @@ import {
   Pressable,
   Dimensions,
   StyleSheet,
+  ToastAndroid,
 } from "react-native";
 
 import { useContext } from "react";
@@ -16,10 +17,23 @@ import { CartContext } from "../CartCxt";
 import { StatusBar } from "expo-status-bar";
 import { AntDesign } from "@expo/vector-icons";
 
+import { db } from "../firebase";
+import * as Application from 'expo-application';
+import { addDoc, collection } from "firebase/firestore";
+
 const Cart = ({ navigation }) => {
 
   const { total, cart, clearCart } = useContext(CartContext);
-  
+
+  const saveCart = async () => {
+    if (cart.length) {
+      const docRef = await addDoc(collection(db, `carts/${Application.androidId}/usercarts`), { cart });
+      return ToastAndroid.show("Saved successfully" + docRef.id, ToastAndroid.LONG)
+    }
+
+    ToastAndroid.show("Can not save empty cart", ToastAndroid.LONG)
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -100,17 +114,26 @@ const Cart = ({ navigation }) => {
             );
           }}
           ListFooterComponent={() => (
-            <>
+            <View>
               {total ? (
-                <Button
-                  title="Clear Cart"
-                  color="red"
-                  onPress={() => {
-                    clearCart();
-                  }}
-                />
+                <View>
+                  <Button
+                    title="Clear Cart"
+                    color="red"
+                    onPress={() => {
+                      clearCart();
+                    }}
+                  />
+                  <Button
+                    title="Save Cart"
+                    color="red"
+                    onPress={() => {
+                      saveCart();
+                    }}
+                  />
+                </View>
               ) : null}
-            </>
+            </View>
           )}
         />
       </View>
