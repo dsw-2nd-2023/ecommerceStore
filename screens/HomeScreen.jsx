@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const data = [];
       querySnapshot.forEach((doc) => {
-        data.push({ id: doc.id, ...doc.data(), price: `R ${doc.data().price}` })
+        data.push({ id: doc.id, ...doc.data(), price: `R ${doc.data().price.toFixed(2)}` })
       });
       setProducts(data)
     });
