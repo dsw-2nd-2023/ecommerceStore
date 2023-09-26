@@ -27,7 +27,7 @@ const Cart = ({ navigation }) => {
 
   const saveCart = async () => {
     if (cart.length) {
-      const docRef = await addDoc(collection(db, `carts/${Application.androidId}/usercarts`), { cart });
+      const docRef = await addDoc(collection(db, `carts/${Application.androidId}/usercarts`), { items: cart, total });
       return ToastAndroid.show("Saved successfully" + docRef.id, ToastAndroid.LONG)
     }
 
