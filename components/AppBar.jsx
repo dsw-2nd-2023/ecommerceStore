@@ -6,6 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import { AntDesign } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CartContext } from "../CartCxt";
+import SavedCarts from "../screens/SavedCarts";
 
 
 const Tab = createBottomTabNavigator();
@@ -66,6 +67,44 @@ const AppBar = () => {
             backgroundColor: "white",
             color: "green",
           },
+          headerStyle: {
+            borderBottomWidth: 1,
+            borderBottomColor: "lightgrey",
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Saved"
+        component={SavedCarts}
+        options={{
+          tabBarLabel: "Saved",
+          title: "Saved Carts",
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="inbox"
+              size={24}
+              color={focused ? "green" : "black"}
+            />
+          ),
+          headerStyle: {
+            borderBottomWidth: 1,
+            borderBottomColor: "lightgrey",
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Add"
+        component={Cart}
+        options={{
+          tabBarLabel: "Add",
+          title: "Add Product",
+          tabBarIcon: ({ focused }) => (
+            <AntDesign
+              name="addfile"
+              size={24}
+              color={focused ? "green" : "black"}
+            />
+          ),
           headerStyle: {
             borderBottomWidth: 1,
             borderBottomColor: "lightgrey",
