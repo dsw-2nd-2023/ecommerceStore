@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import * as Application from 'expo-application';
 import { collection, onSnapshot, query } from "firebase/firestore";
 import { FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const SavedCarts = () => {
 
@@ -48,6 +49,15 @@ const SavedCarts = () => {
                                 {cartItems && item.items.map((cart, i) => <Text key={cart.id} style={styles.name}>{i + 1}. {cart.name}</Text>)}
                             </ScrollView>
                         </>
+                        <MaterialCommunityIcons
+                name="delete"
+                size={30}
+                color="green"
+                style={{
+                  padding: 10,
+                }}
+                onPress={() => console.log("Hi Karabo")}
+              />
                     </TouchableOpacity>
                 )}
                 keyExtractor={(item) => item.id}
